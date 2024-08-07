@@ -1,9 +1,13 @@
 import argparse
-# from dataclasses import dataclass
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
 from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
 
 CHROMA_PATH = "chroma"
 
@@ -17,7 +21,6 @@ Answer the question based only on the following context:
 Answer the question based on the above context: {question}
 """
 
-
 def main():
     # Create CLI.
     parser = argparse.ArgumentParser()
@@ -25,11 +28,13 @@ def main():
     args = parser.parse_args()
     query_text = args.query_text
 
-    # Prepare the DB.
-    embedding_function = OpenAIEmbeddings()
-    db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embedding_function)
+    # Initialize embeddings
+    embeddings = OpenAIEmbeddings(openai_api_key=os.environ['OPENAI_API_KEY'])
 
-    # Search the DB.
+    # Initialize Chroma with the embedding function
+    db = Chroma(persist_directory=CHROMA_PATH, embedding_function=embeddings)
+
+    # Search the DB
     results = db.similarity_search_with_relevance_scores(query_text, k=3)
     if len(results) == 0 or results[0][1] < 0.7:
         print(f"Unable to find matching results.")
@@ -41,12 +46,11 @@ def main():
     print(prompt)
 
     model = ChatOpenAI()
-    response_text = model.predict(prompt)
+    response_text = model.invoke(prompt)
 
     sources = [doc.metadata.get("source", None) for doc, _score in results]
     formatted_response = f"Response: {response_text}\nSources: {sources}"
     print(formatted_response)
-
 
 if __name__ == "__main__":
     main()

@@ -1,47 +1,57 @@
-Langchain RAG Tutorial
-Install Dependencies
-Install ONNX Runtime (specific to macOS and Windows):
+# Langchain RAG Tutorial
 
-macOS Users: To address current challenges installing onnxruntime via pip, first install it using Conda:
-bash
-Copy code
-conda install onnxruntime -c conda-forge
-For additional help, refer to this thread.
+## Install Dependencies
 
-Windows Users: Follow the guide here to install the Microsoft C++ Build Tools, making sure to complete all steps and set the environment variable path.
-Create and Activate a Virtual Environment:
+1. **Install ONNX Runtime** (specific to macOS and Windows):
+    - **macOS Users**: To address challenges installing `onnxruntime` via pip, first install it using Conda:
 
-Create a virtual environment:
-bash
-Copy code
-python -m venv myenv
-Activate the virtual environment:
+    ```bash
+    conda install onnxruntime -c conda-forge
+    ```
 
-macOS/Linux:
-bash
-Copy code
-source myenv/bin/activate
-Windows:
-bash
-Copy code
-myenv\Scripts\activate
-Install Python Dependencies:
+    For additional help, refer to this [thread](https://github.com/microsoft/onnxruntime/issues/11037).
 
-Install dependencies listed in the requirements.txt file:
-bash
-Copy code
-pip install -r requirements.txt
-Install Markdown Dependencies:
+    - **Windows Users**: Follow the guide [here](https://github.com/bycloudai/InstallVSBuildToolsWindows?tab=readme-ov-file) to install the Microsoft C++ Build Tools. Make sure to complete all steps and set the environment variable path.
 
-Install additional markdown dependencies:
-bash
-Copy code
-pip install "unstructured[md]"
-Create the Database
+2. **Create and Activate a Virtual Environment**:
+    - Create a virtual environment:
+
+    ```bash
+    python -m venv myenv
+    ```
+
+    - Activate the virtual environment:
+        - **macOS/Linux**: 
+
+        ```bash
+        source myenv/bin/activate
+        ```
+
+        - **Windows**: 
+
+        ```bash
+        myenv\Scripts\activate
+        ```
+
+3. **Install Python Dependencies**:
+    - Install dependencies listed in the `requirements.txt` file:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Install Markdown Dependencies**:
+    - Install additional markdown dependencies:
+
+    ```bash
+    pip install "unstructured[md]"
+    ```
+
+## Create the Database
+
 Generate the Chroma DB by running:
 
-bash
-Copy code
+```bash
 python create_database.py
 Query the Database
 Query the Chroma DB with:
@@ -86,9 +96,3 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH:/usr/local/bin
 Additional Resources
 Here is a step-by-step tutorial video: RAG+Langchain Python Project: Easy AI/Chat For Your Docs.
-
-This guide includes installation steps, environment configuration, and usage instructions tailored to your project.
-
-> You'll also need to set up an OpenAI account (and set the OpenAI key in your environment variable) for this to work.
-
-Here is a step-by-step tutorial video: [RAG+Langchain Python Project: Easy AI/Chat For Your Docs](https://www.youtube.com/watch?v=tcqEUSNCn8I&ab_channel=pixegami).

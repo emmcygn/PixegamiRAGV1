@@ -1,4 +1,38 @@
+# Python Bytecode
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+myenv/
+venv/
 .env
-chroma_*
-chroma
+
+# Chroma DB directory
+chroma/
+
+# IDE/Editor Specific
+.vscode/
+.idea/
+
+# Operating System files
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment Variables
+.env
+
+# Miscellaneous
+*.sqlite3
+*.pkl
+*.pyd
+
+# macOS specific
+*.DS_Store
+
+# Windows specific
+*.db
+*.bak
+*.swp
